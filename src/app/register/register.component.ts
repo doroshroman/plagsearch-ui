@@ -9,7 +9,7 @@ import { AuthService } from '../_services/auth.service';
 export class RegisterComponent implements OnInit {
 
   form: any = {};
-  isSeccessful = false;
+  isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.form).subscribe(
       data => {
         console.log(data);
-        this.isSeccessful = true;
+        this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
       err => {
