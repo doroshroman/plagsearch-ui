@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseApiUrl: 'http://127.0.0.1:5000/',
+  googleClientId: '527591642491-datt31sqkvd277poqsugq13sl9blf9i0.apps.googleusercontent.com'
 };
 
 /*
