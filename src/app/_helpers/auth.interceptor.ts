@@ -17,8 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
         
         if (accessToken != null) {
             const headers = new HttpHeaders({
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${accessToken}`
             })
             authReq = req.clone({headers: headers});
         }

@@ -15,8 +15,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
-
-import { NgxFileDropModule } from 'ngx-file-drop';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FileDropComponent } from './file-drop/file-drop.component';
 
 @NgModule({
@@ -33,7 +32,7 @@ import { FileDropComponent } from './file-drop/file-drop.component';
     FormsModule,
     HttpClientModule,
     SocialLoginModule,
-    NgxFileDropModule
+    ReactiveFormsModule
   ],
   providers: [authInterceptorProviders, 
     {

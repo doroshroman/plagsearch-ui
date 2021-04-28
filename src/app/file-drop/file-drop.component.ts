@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { DocumentService } from '../_services/document.service';
+import { FormBuilder, FormGroup } from "@angular/forms";
+
 
 @Component({
   selector: 'app-file-drop',
@@ -8,65 +9,31 @@ import { DocumentService } from '../_services/document.service';
   styleUrls: ['./file-drop.component.scss']
 })
 export class FileDropComponent implements OnInit {
+  form: FormGroup;
 
-  form:any = {};
-  fileEntry: NgxFileDropEntry | undefined;
-  file: File | undefined;
-  isFileUploaded = false;
-  isDirectory = false;
-  isOneFile = true;
-  isAddingSuccessful = false;
-  errorMessage = '';
-
-  constructor(private docService: DocumentService) { }
+  constructor(public fb: FormBuilder, private docService: DocumentService) { 
+    this.form = this.fb.group({
+      name: [''],
+      description: [''],
+      attachment: [null]
+    })
+  }
 
   ngOnInit(): void {
   }
+  uploadFile(event: any){
+    const file = (event.target).files[0];
+    this.form.patchValue({
+      attachment: file
+    });
+    this.form.get('attachment')!.updateValueAndValidity();
+  }
   onSubmit() {
-    let document = {
-      'name': this.form.name,
-      'description': this.form.description,
-      'attachment': this.file
-    }
-    this.docService.postNewDocument(document).subscribe(
-      data => {
-        this.isAddingSuccessful = true;
-      },
-      err => {
-        console.log(err);
-        this.errorMessage = typeof err.error.message === "undefined"?  err.error.msg : err.error.message;
-      }
+    this.docService.postNewDocument(this.form).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
     )
   }
-  public dropped(files: NgxFileDropEntry[]) {
-    if (files.length > 1) {
-      this.isOneFile = false;
-    }
-    else{
-      this.fileEntry = files[0];
-      if(this.fileEntry.fileEntry.isDirectory){
-        this.isDirectory = true;
-      }else{
-        this.addDocument(this.fileEntry);
-      }
-    }
-  }  
-  addDocument(droppedFile: NgxFileDropEntry) {
-    const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-    fileEntry.file((file: File) => {
-      this.file = file;
-      this.isFileUploaded = true;
-    });
-  }
-  
-  public fileOver(event: any) {
-    console.log(event);
-  }
-
-  public fileLeave(event: any) {
-    console.log(event);
-  }
-
 
 
 }
