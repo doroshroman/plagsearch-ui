@@ -16,19 +16,24 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { FileDropComponent } from './file-drop/file-drop.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    FileDropComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    NgxFileDropModule
   ],
   providers: [authInterceptorProviders, 
     {

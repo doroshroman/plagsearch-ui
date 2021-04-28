@@ -1,0 +1,94 @@
+<div class="center">
+    <div id="drop-title">
+        <p class="h2 text-center">Check your file against plagiarism without ads</p>
+    </div>
+    <div *ngIf="!isAddingSuccessful" class="card col-md-8 mx-auto">
+        <div class="card-body">
+          <form
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                [(ngModel)]="form.name"
+                required
+                #name="ngModel"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="f.submitted && name.invalid"
+              >
+                Name is required!
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  name="description"
+                  [(ngModel)]="form.description"
+                  #description="ngModel"
+                  rows="2"
+                ></textarea>
+              </div>
+              <br>
+              <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                    <p class="lead">Drop your file here or </p>
+                    <p id="drop-button">
+                        <button type="button" class="btn btn-success" (click)="openFileSelector()">Browse file</button>
+                    </p>
+                    </ng-template>
+                </ngx-file-drop>
+                <br>
+                <div 
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="f.submitted && (isDirectory || !isOneFile)">
+                    Don't add directory, only one file
+                </div>
+                <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="f.submitted && !isFileUploaded"
+                >
+                    Please upload your file
+                </div>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && errorMessage"
+            >
+              Add failed: {{ errorMessage }}
+            </div>
+              <div class="form-group text-center">
+                <button (click)="onSubmit()" class="btn btn-primary btn-block">
+                    Add
+                </button>
+              </div>
+              
+        </form>
+        </div>
+    </div>
+    <br>
+    
+    <br>
+    <br>
+    <div>
+        <p class="h4">Your documents</p>
+        <hr>
+        
+
+    </div>
+</div>
+

@@ -27,8 +27,8 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     this.authService.register(this.form).subscribe(
       data => {
-        this.tokenStorage.saveAccessToken(data.accessToken);
-        this.tokenStorage.saveRefreshToken(data.refreshToken);
+        this.tokenStorage.saveAccessToken(data.access_token);
+        this.tokenStorage.saveRefreshToken(data.refresh_token);
 
         this.isSuccessful = true;
         this.isSignUpFailed = false;

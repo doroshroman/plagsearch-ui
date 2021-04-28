@@ -1,11 +1,10 @@
 import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
 
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Observable } from 'rxjs';
 
-const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -15,8 +14,13 @@ export class AuthInterceptor implements HttpInterceptor {
         let authReq = req;
         const accessToken = this.token.getAccessToken();
 
+        
         if (accessToken != null) {
-            authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer' + accessToken) });
+            const headers = new HttpHeaders({
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            })
+            authReq = req.clone({headers: headers});
         }
         return next.handle(authReq);
     }

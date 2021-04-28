@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
     });
   }
   private loginSuccessful(data: any): void {
-    this.tokenStorage.saveAccessToken(data.accessToken);
-    this.tokenStorage.saveRefreshToken(data.refreshToken);
+    this.tokenStorage.saveAccessToken(data.access_token);
+    this.tokenStorage.saveRefreshToken(data.refresh_token);
 
     this.isLoginFailed = false;
     this.isLoggedIn = true;
