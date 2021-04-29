@@ -17,6 +17,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileDropComponent } from './file-drop/file-drop.component';
+import { FileListComponent } from './file-list/file-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FileDropComponent } from './file-drop/file-drop.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    FileDropComponent
+    FileDropComponent,
+    FileListComponent
   ],
   imports: [
     BrowserModule,

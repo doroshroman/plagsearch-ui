@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentService } from '../_services/document.service';
 import { FormBuilder, FormGroup } from "@angular/forms";
-
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-file-drop',
@@ -10,12 +10,16 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 })
 export class FileDropComponent implements OnInit {
   form: FormGroup;
+  isUploaded = false;
+  isUploadFailed = false;
+  errorMessage = '';
 
-  constructor(public fb: FormBuilder, private docService: DocumentService) { 
+  constructor(public fb: FormBuilder, private docService: DocumentService) {
+
     this.form = this.fb.group({
-      name: [''],
+      name: ['', Validators.required],
       description: [''],
-      attachment: [null]
+      attachment: [null, Validators.required]
     })
   }
 
@@ -30,8 +34,14 @@ export class FileDropComponent implements OnInit {
   }
   onSubmit() {
     this.docService.postNewDocument(this.form).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+      (response) => {
+        console.log(response);
+        this.isUploaded = true;
+
+      },
+      (err) => {
+        this.errorMessage = err.error.message;
+      }
     )
   }
 

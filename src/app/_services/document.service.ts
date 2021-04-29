@@ -13,13 +13,19 @@ export class DocumentService {
   constructor(private http: HttpClient) { }
 
   public postNewDocument(document: any): Observable<any> {
-    console.log(document);
     const formData: any = new FormData();
     formData.append('attachment', document.get('attachment').value);
     formData.append('name', document.get("name").value);
     formData.append('description', document.get("description").value)
     
     return this.http.post(this.url + 'document/add', formData);
+  }
+
+  public getAllDocuments(): Observable<any> {
+    return this.http.get(this.url + 'documents');
+  }
+  public getDocumentByHash(hash: string): Observable<any> {
+    return this.http.get(this.url + `document/${hash}`);
   }
 
 

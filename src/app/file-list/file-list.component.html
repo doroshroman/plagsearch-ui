@@ -1,0 +1,23 @@
+<div>
+    <p class="h4">Your documents</p>
+    <hr>
+    <br>
+    <div class="row">
+        
+        <div *ngFor="let file of files" class="col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ file.name }}</h5>
+                    <p class="card-text">{{ file.description }}</p>
+                    <button type="button" class="btn btn-danger m-2">Delete</button>
+                    <button type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>          
+        </div>
+        <div *ngIf="isEmpty">
+            <p class="text-center h5">There is no documents for now</p>
+        </div>
+    </div>
+    
+
+</div>
