@@ -8,12 +8,13 @@ import { Validators } from '@angular/forms';
   templateUrl: './file-drop.component.html',
   styleUrls: ['./file-drop.component.scss']
 })
+
 export class FileDropComponent implements OnInit {
   form: FormGroup;
   isUploaded = false;
   isUploadFailed = false;
   errorMessage = '';
-
+  
   constructor(public fb: FormBuilder, private docService: DocumentService) {
 
     this.form = this.fb.group({
@@ -35,9 +36,9 @@ export class FileDropComponent implements OnInit {
   onSubmit() {
     this.docService.postNewDocument(this.form).subscribe(
       (response) => {
-        console.log(response);
         this.isUploaded = true;
 
+        window.location.reload();
       },
       (err) => {
         this.errorMessage = err.error.message;

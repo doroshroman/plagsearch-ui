@@ -24,8 +24,20 @@ export class DocumentService {
   public getAllDocuments(): Observable<any> {
     return this.http.get(this.url + 'documents');
   }
+
   public getDocumentByHash(hash: string): Observable<any> {
     return this.http.get(this.url + `document/${hash}`);
+  }
+
+  public deleteDocumentByHash(hash: string): Observable<any> {
+    return this.http.delete(this.url + `document/${hash}`);
+  }
+
+  public updateDocumentByNameAndDescription(hash: string, name: string, description: string): Observable<any> {
+    return this.http.put(this.url + `document/${hash}`, {
+      "name": name,
+      "description": description
+    });
   }
 
 

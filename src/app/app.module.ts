@@ -18,6 +18,10 @@ import { environment } from 'src/environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileDropComponent } from './file-drop/file-drop.component';
 import { FileListComponent } from './file-list/file-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { FileListComponent } from './file-list/file-list.component';
     RegisterComponent,
     HomeComponent,
     FileDropComponent,
-    FileListComponent
+    FileListComponent,
+    UpdateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,10 @@ import { FileListComponent } from './file-list/file-list.component';
     FormsModule,
     HttpClientModule,
     SocialLoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatInputModule
   ],
   providers: [authInterceptorProviders, 
     {
@@ -52,6 +60,7 @@ import { FileListComponent } from './file-list/file-list.component';
       } as SocialAuthServiceConfig,
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [UpdateDialogComponent]
 })
 export class AppModule { }
