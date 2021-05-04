@@ -22,6 +22,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
+import { ReportComponent } from './report/report.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
     HomeComponent,
     FileDropComponent,
     FileListComponent,
-    UpdateDialogComponent
+    UpdateDialogComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,20 @@ import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
     ReactiveFormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule,
+
+
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300
+    })
+
   ],
   providers: [authInterceptorProviders, 
     {

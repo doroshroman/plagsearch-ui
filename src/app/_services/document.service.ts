@@ -40,5 +40,9 @@ export class DocumentService {
     });
   }
 
+  public getPlagiarismReportByHash(hash: string | null): Observable<any> {
+    return this.http.get(this.url + `document/analyze/${hash}`);
+  }
+
 
 }

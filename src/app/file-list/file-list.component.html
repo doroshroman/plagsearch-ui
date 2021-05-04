@@ -7,10 +7,11 @@
         <div *ngFor="let file of files;" class="col-md-4 p-2">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ file.name }}</h5>
+                    <h3 class="card-title">{{ file.name }}</h3>
                     <p class="card-text">{{ file.description }}</p>
                     <button type="button" class="btn btn-danger m-2" (click)="deleteFile(file.hash_sha256)">Delete</button>
-                    <button type="button" class="btn btn-primary" (click)="updateFile(file.hash_sha256, file.name, file.description)">Update</button>
+                    <button type="button" class="btn btn-primary m-2" (click)="updateFile(file.hash_sha256, file.name, file.description)">Update</button>
+                    <button type="button" class="btn btn-success m-2" [routerLink]="['/report', file.hash_sha256]" routerLinkActive="active">Check</button>
                 </div>
             </div>          
         </div>
