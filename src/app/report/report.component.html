@@ -1,0 +1,54 @@
+<div class="container">
+    
+    <div class="m-5">
+        <h1>Report</h1>
+        <p class="lead">Here you can find similarity analysis of current document.</p>
+        <hr>
+    </div>
+    <br>
+    <div *ngIf="!isLoaded" class="d-flex justify-content-center">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="row" *ngFor="let record of report;">
+        <div class="col-md-3">
+            <circle-progress
+                [percent]="record.similarity"
+                [radius]="80"
+                [outerStrokeWidth]="16"
+                [innerStrokeWidth]="8"
+                [outerStrokeColor]="'#78C000'"
+                [innerStrokeColor]="'#C7E596'"
+                [animation]="true"
+                [showSubtitle]="false"
+                [animationDuration]="300">
+            </circle-progress>
+        </div>
+        <div class="lead col-md-3">
+            <p>
+                <b>Overall similarity</b>
+            </p>
+            <br>
+            <p>
+               {{ record.similarity }}
+            </p>
+        </div>
+        <div class="lead col-md-3">
+            <p>
+                <b>Last checked date</b>
+            </p>
+            <br>
+            <p>
+                {{ record.checked_at }}
+            </p>
+        </div>
+        <div class="lead col-md-3">
+            <p>
+                <b>Hash</b>
+            </p>
+            <br>
+            <p>
+                {{ record.simhash }}
+            </p>
+        </div>
+    </div>
+</div>

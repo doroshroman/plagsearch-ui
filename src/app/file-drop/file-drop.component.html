@@ -1,0 +1,57 @@
+<div class="center">
+    <div id="drop-title">
+        <p class="h2 text-center">Check your file against plagiarism without ads</p>
+    </div>
+    <div *ngIf="!isUploaded" class="card col-md-5 mx-auto">
+      <div class="card-body">
+      <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+            <div>
+                <input type="file" required (change)="uploadFile($event)">
+            </div>
+            <br>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="ngForm.submitted && form.get('attachment')?.invalid"
+            >
+              File is required!
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <div><input class="form-control" required placeholder="Name" formControlName="name"></div>
+            <br>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="ngForm.submitted && form.get('name')?.invalid"
+            >
+              Name is required!
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <input class="form-control" placeholder="Description" formControlName="description">
+        </div>
+        <br>
+        <div class="form-group">
+            <button class="btn btn-danger btn-block btn-lg">Create</button>
+        </div>
+        <br>
+        <div class="form-group">
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="ngForm.submitted && !isUploadFailed"
+            >
+              Upload failed {{ errorMessage }}
+            </div>
+          </div>
+    </form>
+    </div>
+    </div>
+    
+    <br>
+</div>
+
